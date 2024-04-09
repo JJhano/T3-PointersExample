@@ -1,19 +1,21 @@
 CXX = g++
 CXXFLAGS = -std=c++11 -Wall
 
-SRCS = basico.cpp
-OBJS = $(SRCS:.cpp=.o)
-EXEC = basico
+SRCS = basico.cpp main.cpp
+EXEC1 = basico
+EXEC2 = main
 
 .PHONY: all clean
 
-all: $(EXEC)
+all: $(EXEC1) $(EXEC2)
 
-$(EXEC): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $(EXEC)
+# Compilación de basico.cpp
+$(EXEC1): basico.cpp
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+# Compilación de main.cpp
+$(EXEC2): main.cpp
+	$(CXX) $(CXXFLAGS) $^ -o $@
 
 clean:
-	rm -f $(OBJS) $(EXEC)
+	rm -f $(EXEC1) $(EXEC2)
